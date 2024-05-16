@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <script type="text/javascript">
+      let doCall = () => {
+        alert("CCCCCCCCCC");
+      };
+    </script>
+
+    <div class="dialog-body">
+      <div class="dialog-panel">
+        <div class="panel-header">
+          <span class="panel-title">Shortcuts Manager</span>
+
+          <div class="service-switch-box">
+            <input type="checkbox" class="service-switch" onchange="doCall" />
+            <span>Service is running</span>
+          </div>
+        </div>
+
+        <hr />
+        <div id="shortcuts-list"></div>
+      </div>
+    </div>
+  </body>
+</html>
