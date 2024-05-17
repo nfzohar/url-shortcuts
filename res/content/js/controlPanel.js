@@ -23,22 +23,26 @@ function loadShortcutsFromStorage() {
 }
 
 function generateShortcutHTML(shortcut) {
-  let content = "";
-  let url = shortcut.url;
-  let keys = [shortcut.eventKeys, shortcut.key].flat();
+  let content = '<div class="url-shortcut">';
 
-  content += '<div class="url-shortcut">';
+  content += generateKeysHTML(shortcut);
+  content +=
+    '<a href="' + shortcut.url + '" target="_blank">' + shortcut.url + "</a>";
 
-  content += '<div class="url-shortcut-keys-section">';
-  keys.forEach((key) => {
-    content += '<button class="url-shortcut-key">' + key + "</button>";
-  });
-  content += "</div>";
-
-  content += '<a href="' + url + '" target="_blank">' + url + "</a>";
-
-  content += '<button class="url-shortcut-key" >X</button>';
-  content += "</div>";
-
+  content += '<button class="url-shortcut-key">X</button></div>';
   return content;
 }
+
+function generateKeysHTML(shortcut) {
+  let keys = [shortcut.eventKeys, shortcut.key].flat();
+  let keysHtml = '<div class="url-shortcut-keys-section">';
+
+  keys.forEach((key) => {
+    keysHtml += '<button class="url-shortcut-key">' + key + "</button>";
+  });
+
+  keysHtml += "</div>";
+  return keysHtml;
+}
+
+function addNewShortcut() {}

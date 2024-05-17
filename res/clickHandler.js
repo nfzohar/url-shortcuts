@@ -12,7 +12,7 @@ chrome.action.onClicked.addListener((tab) => {
     });
 });
 
-function showModalOnClick(tab) {
+function showModalOnClick() {
   let modal = document.getElementById("url-shortcuts-manager-panel");
 
   if (modal) {
