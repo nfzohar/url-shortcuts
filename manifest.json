@@ -13,7 +13,7 @@
     "48": "res/icon/48x48.png",
     "64": "res/icon/64x64.png"
   },
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "background": {
     "service_worker": "res/clickHandler.js"
   },

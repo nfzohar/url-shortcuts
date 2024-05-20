@@ -85,6 +85,7 @@
   text-align: center;
   align-items: center;
   color: #ffffff;
+  border-color: #ffffff;
   background-color: #ce0000;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -126,6 +127,23 @@
   column-gap: 0.75rem;
   align-items: center;
   width: 33%;
+}
+
+.url-shortcut-remove-button {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.url-shortcut-remove-button:hover {
+  background-color: #ce0000;
+  color: #ffffff;
 }
 
 /* SM */
