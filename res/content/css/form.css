@@ -26,6 +26,7 @@
 }
 
 .form-new-button:hover {
+  font-weight: bold;
   background-color: #c7c7c7;
 }
 
@@ -48,7 +49,7 @@
   border: 1px solid #999999;
 }
 
-#add-new-url-shortcut:hover {
+#add-new-url-shortcut-button:hover {
   color: #ffffff;
   border-color: #ffffff;
   background-color: #005a0c;

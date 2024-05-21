@@ -3,9 +3,12 @@ setTimeout(() => {
 }, 100);
 
 function main() {
-  addCloseButtonListener();
-  addToggleServiceStateListener();
   generateAddNewShortcutFormHTML();
+
+  addCloseButtonListener();
+  addNewShortcutButtonListener();
+  addToggleServiceStateListener();
+
   loadShortcutsFromStorage();
 }
 
@@ -77,7 +80,7 @@ function generateAddNewShortcutFormHTML() {
   formHTML +=
     '<input type="text" placeholder="http://example.com/..." id="new-shortcut-input-link" />';
   formHTML +=
-    '<button id="add-new-url-shortcut" title="Add new shortcut" class="a-button form-new-button">Add</button>';
+    '<button id="add-new-url-shortcut-button" title="Add new shortcut" class="a-button form-new-button">Add</button>';
 
   newShortcutForm.innerHTML = formHTML;
 }
@@ -108,7 +111,24 @@ function toggleServiceState() {
   console.log(chrome.storage.sync.get(["service_running"]));
 }
 
-function addNewShortcut(shortcut) {}
+function addNewShortcut() {
+  let shortcutsList = [];
+  let definedShortcuts = chrome.storage.sync.get(["url_shortcut_list"]);
+
+  let newShortcut = {
+    eventKeys: ["alt"],
+    key: ["p"],
+    url: "https://process.dewesoft.com/",
+  };
+
+  shortcutsList.concat(definedShortcuts);
+  shortcutsList.push(newShortcut);
+
+  chrome.storage.sync.set({ url_shortcut_list: shortcutsList });
+
+  //
+  console.log(chrome.storage.sync.get(["url_shortcut_list"]));
+}
 
 function removeShortcut(shortcut) {}
 
@@ -130,6 +150,14 @@ function addCloseButtonListener() {
     .getElementById("modal-close-button")
     .addEventListener("click", () => {
       dialog.close();
+    });
+}
+
+function addNewShortcutButtonListener() {
+  document
+    .getElementById("add-new-url-shortcut-button")
+    .addEventListener("click", () => {
+      addNewShortcut();
     });
 }
 
