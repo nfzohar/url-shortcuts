@@ -8,29 +8,28 @@
   gap: 5px;
 }
 
-.new-shortcut-input-keys {
+.form-link-section {
+  width: 100%;
+  gap: 5px;
   display: flex;
   flex-direction: row;
-  gap: 5px;
-  justify-content: space-between;
   align-items: center;
 }
 
-.form-new-button {
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  border-width: 1px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.form-key-inputs {
+  gap: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.form-new-button:hover {
+.form-input-event-key:hover {
   font-weight: bold;
   background-color: #c7c7c7;
 }
 
-#new-shortcut-input-key-letter {
+#form-input-symbol {
   width: 2rem;
   height: 2rem;
   background-color: #ffffff;
@@ -39,9 +38,8 @@
   border: 1px solid #999999;
 }
 
-#new-shortcut-input-link {
-  width: 100%;
-  height: 2rem;
+#form-input-link {
+  width: 90%;
   padding: 2px;
   margin: 0 1rem;
   background-color: #ffffff;
@@ -49,9 +47,14 @@
   border: 1px solid #999999;
 }
 
-#add-new-url-shortcut-button:hover {
+#form-input-submit {
+  width: 32px;
+  height: 32px;
+  font-size: 150%;
+}
+
+#form-input-submit:hover {
   color: #ffffff;
-  border-color: #ffffff;
   background-color: #005a0c;
 }
 

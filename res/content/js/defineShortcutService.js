@@ -10,50 +10,45 @@
 */
 initializeExtension();
 
-function initializeExtension() {
-  if (
-    !chrome.storage.sync.get(["url_shortcut_list"]) &&
-    !chrome.storage.sync.get(["service_running"])
-  ) {
-    chrome.storage.sync.set({ url_shortcut_list: [], service_running: true });
+async function initializeExtension() {
+  let definedShortcuts = await chrome.storage.local.get(["url_shortcut_list"]);
+  definedShortcuts = definedShortcuts["url_shortcut_list"];
+
+  if (typeof definedShortcuts == "undefined") {
+    chrome.storage.local.set({
+      url_shortcut_list: [],
+      service_running: true,
+    });
   }
 
-  chrome.storage.onChanged.addListener(() => {
-    location.reload();
-  });
-  loadShortcuts();
+  loadShortcuts(definedShortcuts);
 }
 
-function loadShortcuts() {
-  let definedShortcuts = chrome.storage.sync.get(["url_shortcut_list"]);
-
+async function loadShortcuts(definedShortcuts) {
   if (definedShortcuts.length) {
     definedShortcuts.forEach((shortcut) => {
-      addShortcutListener(shortcut);
+      addCustomShortcutListener(shortcut);
     });
   }
 }
 
-function addShortcutListener(shortcut) {
-  var listenerServiceRunning = Boolean(
-    chrome.storage.sync.get(["service_running"])
-  );
-
+function addCustomShortcutListener(shortcut) {
   document.addEventListener("keydown", function (event) {
-    if (listenerServiceRunning) {
-      setTimeout(runKeyboardShortcut(event, shortcut), 200);
-    }
+    setTimeout(runKeyboardShortcut(event, shortcut), 200);
   });
 }
 
 function runKeyboardShortcut(event, shortcut) {
-  if (
-    checkEventModifierKeys(event, shortcut.eventKeys, shortcut.key) &&
-    event.key == shortcut.key
-  ) {
-    event.preventDefault();
-    window.open(shortcut.url, "_blank");
-  }
+  chrome.storage.local.get(["service_running"], (serviceIsRunning) => {
+    if (
+      checkEventModifierKeys(event, shortcut.eventKeys, shortcut.key) &&
+      event.key == shortcut.key &&
+      serviceIsRunning
+    ) {
+      event.preventDefault();
+      window.open(shortcut.url, "_blank");
+    }
+  });
 }
 
 function checkEventModifierKeys(event, eventKeys) {
