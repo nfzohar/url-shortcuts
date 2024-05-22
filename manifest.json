@@ -11,7 +11,8 @@
     "16": "res/icon/16x16.png",
     "32": "res/icon/32x32.png",
     "48": "res/icon/48x48.png",
-    "64": "res/icon/64x64.png"
+    "64": "res/icon/64x64.png",
+    "128": "res/icon/128x128.png"
   },
   "permissions": ["activeTab", "scripting", "storage"],
   "background": {
