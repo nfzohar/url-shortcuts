@@ -20,7 +20,7 @@ async function loadShortcutsFromLocalStorage() {
 function generateShortcutHTML(shortcut) {
   return `<div class="url-shortcut">
     ${generateKeysHTML(shortcut)} 
-    ${formatURLs(shortcut.urls)}
+    ${formatURLs(shortcut.urls || [])}
     ${addDeleteShortcutButton(shortcut)}
   </div>`;
 }
@@ -37,25 +37,28 @@ function generateKeysHTML(shortcut) {
 }
 
 function formatURLs(urls) {
-  let urlsHTML = '<div id="url-shortcut-links">';
+  let urlsHTML = "";
 
-  urls.forEach((url) => {
-    let link = url.replace("https://", "").replace("http://", "");
-    urlsHTML += `<a class="url-shortcut-link" title="${url}" href="${url}" target="_blank">${link}</a>`;
-  });
+  if (urls.length) {
+    urls.forEach((url) => {
+      let link = url.replace("https://", "").replace("http://", "");
+      urlsHTML += `<a class="url-shortcut-link" title="${url}" href="${url}" target="_blank">${link}</a>`;
+    });
+  }
 
-  return urlsHTML + "</div>";
+  return `<div id="url-shortcut-links">˘${urlsHTML}</div>`;
 }
 
 function addDeleteShortcutButton(shortcut) {
-  return `<button id="remove-${shortcut.id}" title="Remove shortcut" class="a-button url-shortcut-remove-button">X</button>`;
+  let id = "remove-" + shortcut.id;
+  let title = "Remove shortcut";
+
+  return `<button id="${id}" title="${title}" class="a-button url-shortcut-remove-button">X</button>`;
 }
 
 async function setCheckedServiceRunningCheckbox() {
   let isServiceRunning = await chrome.storage.local.get(["service_running"]);
 
-  if (isServiceRunning["service_running"]) {
-    document.getElementById("service-state-toggle").checked =
-      isServiceRunning["service_running"];
-  }
+  document.getElementById("service-state-toggle").checked =
+    isServiceRunning["service_running"];
 }

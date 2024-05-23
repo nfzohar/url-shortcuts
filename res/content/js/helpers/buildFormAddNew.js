@@ -1,7 +1,5 @@
 function generateAddNewShortcutFormHTML() {
-  let newShortcutForm = document.getElementById("new-shortcut-form");
-
-  newShortcutForm.innerHTML = `
+  document.getElementById("new-shortcut-form").innerHTML = `
   <div class="form-key-inputs">
     ${generateSupportedEventKeysHTML()}
     <b>+</b>
@@ -11,10 +9,9 @@ function generateAddNewShortcutFormHTML() {
 }
 
 function generateSupportedEventKeysHTML() {
-  let eventKeys = ["meta", "ctrl", "alt"];
   let eventKeysHTML = "";
 
-  eventKeys.forEach((key) => {
+  supportedEventKeys.forEach((key) => {
     let title = `Listen for ${key} key`;
     let id = `new-shortcut-input-key-${key}`;
 

@@ -2,6 +2,7 @@ setTimeout(() => {
   main();
 }, 100);
 
+
 function main() {
   generateAddNewShortcutFormHTML();
 

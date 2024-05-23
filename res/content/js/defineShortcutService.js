@@ -1,13 +1,3 @@
-/*
-  {
-    eventKeys: ["alt", "shift"],
-    key: ["Š"],
-    url: "https://erp.dewesoft.com",
-  },
-  { eventKeys: ["alt"], key: ["p"], url: "https://process.dewesoft.com/" },
-  { eventKeys: ["ctrl"], key: ["i"], url: "https://dewesoft.com/" },
-  { eventKeys: ["shift"], key: ["1"], url: "https://dewesoft.com/" },
-*/
 initializeExtension();
 
 async function initializeExtension() {
