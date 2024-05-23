@@ -46,7 +46,9 @@ function runKeyboardShortcut(event, shortcut) {
       serviceIsRunning
     ) {
       event.preventDefault();
-      window.open(shortcut.url, "_blank");
+      shortcut.urls.forEach((url) => {
+        window.open(url, "_blank");
+      });
     }
   });
 }

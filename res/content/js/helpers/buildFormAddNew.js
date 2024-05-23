@@ -33,7 +33,7 @@ function generateSymbolInputHTML() {
 
 function generateLinkInputHTML() {
   let linkInput =
-    '<textarea id="form-input-link" placeholder="http://example-1.com, http://example-2.com..." rows="1"></textarea>';
+    '<textarea id="form-input-links" placeholder="http://example-1.com, http://example-2.com..." rows="1"></textarea>';
   let submitInput =
     '<button id="form-input-submit" title="Add new shortcut" class="a-button">+</button>';
 

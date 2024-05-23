@@ -7,38 +7,29 @@ function toggleServiceState() {
   });
 }
 
-async function addNewShortcut() {
+async function addNewShortcut(newShortcut) {
   let listOfShortcuts = await chrome.storage.local.get(["url_shortcut_list"]);
   listOfShortcuts = listOfShortcuts["url_shortcut_list"];
 
-  let newShortcut = getFormInputValues();
+  if (
+    !newShortcut.eventKeys.length ||
+    !newShortcut.urls.length ||
+    !newShortcut.key
+  ) {
+    alert("Can't add an empty shortcut.");
+    return;
+  }
+
   listOfShortcuts.push(newShortcut);
-
-  chrome.storage.local.set({ url_shortcut_list: listOfShortcuts }).then(() => {
-    console.log(chrome.storage.local.get(["url_shortcut_list"]));
-  });
+  chrome.storage.local.set({ url_shortcut_list: listOfShortcuts });
 }
 
-function removeShortcut(shortcut) {}
+async function removeShortcut(removedShortcut) {
+  let currentShortcuts = await chrome.storage.local.get(["url_shortcut_list"]);
 
-function getFormInputValues() {
-  let urls = document.getElementById("form-input-link");
-  let symbol = document.getElementById("form-input-symbol");
-  let eventKeys = document.getElementById("form-input-link");
+  currentShortcuts = currentShortcuts["url_shortcut_list"].filter(
+    (oldShortcut) => oldShortcut.id != removedShortcut.id
+  );
 
-  // TO DO: add a global variable for new shortcut object
-
-  // TO DO: set event listeners to denote selected state and new shortcut object manipulation
-
-  return {
-    id: "",
-    eventKeys: ["alt"],
-    key: ["P"],
-    url: "https://erp.dewesoft.com/",
-  };
-}
-
-function isUpperCase(value) {
-  let str = String(value);
-  return str !== str.toLowerCase() && str === str.toUpperCase();
+  chrome.storage.local.set({ url_shortcut_list: currentShortcuts });
 }
