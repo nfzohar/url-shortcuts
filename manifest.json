@@ -3,7 +3,7 @@
   "name": "URL Shortcuts",
   "description": "Setup custom keyboard shortcuts to open URLs.",
   "author": "nfzohar",
-  "version": "1.0",
+  "version": "2.0",
   "action": {
     "default_title": "Manage your URL shortcuts"
   },
@@ -16,34 +16,28 @@
   },
   "permissions": ["activeTab", "scripting", "storage"],
   "background": {
-    "service_worker": "res/clickHandler.js"
+    "service_worker": "res/background.js",
+    "scripts": ["res/background.js"]
   },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "url-shortcuts@nfzohar",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["res/keys.js", "res/shortcuts.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
   "web_accessible_resources": [
     {
       "resources": ["res/content/*"],
       "matches": ["<all_urls>"]
-    }
-  ],
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": [
-        "res/content/js/defineShortcutService.js",
-        "res/content/js/helpers/buildFormAddNew.js",
-        "res/content/js/helpers/manageLocalStorage.js",
-        "res/content/js/helpers/buildShortcutsList.js",
-        "res/content/js/helpers/defineEventListeners.js"
-      ],
-      "css": [
-        "res/content/css/main.css",
-        "res/content/css/form.css",
-        "res/content/css/shortcuts.css"
-      ],
-      "match_origin_as_fallback": false,
-      "match_about_blank": false,
-      "all_frames": false,
-      "run_at": "document_idle",
-      "world": "ISOLATED"
     }
   ]
 }
